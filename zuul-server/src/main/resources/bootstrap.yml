@@ -20,14 +20,14 @@ zuul:
       serviceId: client-01
 
 security:
-  basic:
-    enabled: false
+    basic:
+      enabled: false
     oauth2:
       client:
         access-token-uri: http://localhost:5555/uaa/oauth/token
         user-authorization-uri: http://localhost:5555/uaa/oauth/authorize
-        client-id: zuul-server
+        client-id: zuul_server
         client-secret: secret
-        resource:
-          jwt:
-            key-value: springcloud123
+      resource:
+        jwt:
+          key-value: springcloud123

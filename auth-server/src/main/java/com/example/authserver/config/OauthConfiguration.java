@@ -28,10 +28,11 @@ public class OauthConfiguration extends AuthorizationServerConfigurerAdapter{
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("zuul-server")
+                .withClient("zuul_server")
+                .redirectUris("http://localhost/login")
                 .secret("secret")
-                .scopes("WRITH","read")
-                .authorities("WRITH_READ","WRITH_WRITH")
+                .scopes("WRIGTH","read").autoApprove(true)
+                .authorities("WRIGTH_READ","WRIGTH_WRITE")
                 .authorizedGrantTypes("implicit","refresh_token","password","authorization_code");
     }
 

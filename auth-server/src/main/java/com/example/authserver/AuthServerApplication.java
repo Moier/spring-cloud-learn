@@ -32,11 +32,11 @@ public class AuthServerApplication extends WebSecurityConfigurerAdapter {
 		auth.inMemoryAuthentication()
 			.withUser("guest")
 			.password("guest")
-			.authorities("WRITH_READ")
+			.authorities("WRIGTH_READ")
 			.and()
 			.withUser("admin")
 			.password("admin")
-			.authorities("WRITH_READ","WIRTH_WRITE");
+			.authorities("WRIGTH_READ","WRIGTH_WRITE");
 	}
 
 

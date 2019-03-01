@@ -13,11 +13,17 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableResourceServer
+@RestController
 public class ServiceClientApplication extends ResourceServerConfigurerAdapter {
 
 	public static void main(String[] args) {
@@ -30,13 +36,25 @@ public class ServiceClientApplication extends ResourceServerConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers("/**")
 			.authenticated()
-			.antMatchers(HttpMethod.GET,"/getUser")
-			.hasAuthority("WIRTH_READ");
+			.antMatchers(HttpMethod.GET,"/test")
+			.hasAuthority("WRIGTH_READ");
+	}
+
+	@RequestMapping("/test")
+	public String test(HttpServletRequest request) {
+		System.out.println("----------------header----------------");
+		Enumeration headerNames = request.getHeaderNames();
+		while (headerNames.hasMoreElements()) {
+			String key = (String) headerNames.nextElement();
+			System.out.println(key + ": " + request.getHeader(key));
+		}
+		System.out.println("----------------header----------------");
+		return "hellooooooooooooooo!";
 	}
 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-		resources.resourceId("WRITH")
+		resources.resourceId("WRIGTH")
 				.tokenStore(jwtTokenStore());
 	}
 
