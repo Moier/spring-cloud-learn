@@ -18,6 +18,7 @@ zuul:
     client-01:
       path: /client/**
       serviceId: client-01
+      sensitiveHeaders:
 
 security:
     basic:
